@@ -6,19 +6,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+/* 
 header {
   background-color: #404040;
   padding: 1rem ; 
-  /* 1 rem = 16 px` */
-}
+  1 rem = 16 px
+} */
 
 /* all a inside header */
-header a {
+/* header a {
   color: #fff;
   font-weight: bold;
   text-decoration: none;
-}
+} */
 
 main {
   padding: 1rem;

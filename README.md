@@ -38,6 +38,6 @@
      2. update fetch data
      3. get state from useReducer
   10. Add bootstrap UI Framework
-     1. npm i react-bootstrap bootstrap
-     2. update App.js
+      1. npm i react-bootstrap bootstrap
+      2. update App.js
   11. 

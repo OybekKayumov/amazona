@@ -1,13 +1,17 @@
 import axios from 'axios';
-import React, { useEffect, useReducer } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useReducer } from 'react';
+import { useParams } from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Rating from '../components/Rating';
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
       return {...state, loading: true};
     case 'FETCH_SUCCESS':
-      return {...state, products: action.payload, loading: false};
+      return {...state, product: action.payload, loading: false};
     case 'FETCH_FAIL':
       return {...state, loading: false, error: action.payload};
     default:
@@ -20,7 +24,7 @@ const ProductScreen = () => {
   const { slug } = params;
 
   const [{loading, error, product}, dispatch] = useReducer(reducer, {
-    products: [],
+    product: [],
     loading: true, 
     error: ''
   });
@@ -39,9 +43,48 @@ const ProductScreen = () => {
   }, [slug])
 
   return (
-    <div>
-      <h1>{slug}</h1>
-    </div>
+    loading ? (
+      <div>Loading...</div>
+    ) : error ? ( 
+      <div>{error}</div>
+    ) : ( 
+      <Row>
+        <Col md={6}>
+          <img 
+            className='img-large'
+            src={product.image} 
+            alt={product.name} 
+          />
+        </Col>
+
+        <Col md={3}>
+          <ListGroup>
+            <ListGroup.Item>
+              <h1>{product.name}</h1>
+            </ListGroup.Item>
+            
+            <ListGroup.Item>
+              <Rating
+                rating={product.rating}
+                numReviews={product.numReviews}
+              >
+              </Rating>              
+            </ListGroup.Item>
+            
+            <ListGroup.Item>
+              Price : ${product.price}
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+              Description: 
+              <p>{product.description}</p>
+            </ListGroup.Item>
+          </ListGroup>
+        </Col>
+        
+        <Col md={3}></Col>
+      </Row>
+    )
   )
 }
 

@@ -3,6 +3,7 @@ import { Store } from '../store'
 import { Helmet } from 'react-helmet-async';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Card from 'react-bootstrap/Card';
 import MessageBox from '../components/MessageBox';
 import { Link } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -47,7 +48,10 @@ const CartScreen = () => {
                       
                       <span>{item.quantity}</span>{' '}
 
-                      <Button variant='light' disabled={item.quantity === 1}>
+                      <Button 
+                        variant='light' 
+                        disabled={item.quantity === item.countInStock}
+                      >
                         <i className='fas fa-plus-circle'></i>
                       </Button>
                     </Col>
@@ -67,7 +71,22 @@ const CartScreen = () => {
         }
         </Col>
 
-        <Col md={4}></Col>
+        <Col md={4}>
+          <Card>
+            <Card.Body>
+              <ListGroup variant='flush'>
+                <ListGroup.Item>
+                  <h3>
+                    Subtotal ({cartItems.reduce((acc, curr) => acc+curr.quantity, 0)}{' '} 
+                    items) : $ 
+                    {cartItems.reduce((acc, curr) => acc + curr.price*curr.quantity, 0)}
+                  </h3>
+                </ListGroup.Item>
+
+              </ListGroup>
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
       
     </div>

@@ -53,9 +53,7 @@ function HomeScreen() {
       <h1>Featured Products</h1>
           <div className='products'>
             {
-              // data.products.map(product => (
               loading ? ( 
-                // <div>Loading...</div>
                 <LoadingBox />
               ) : error ? ( 
                 <MessageBox variant="danger">{error}</MessageBox> 

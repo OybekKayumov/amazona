@@ -83,6 +83,17 @@ const CartScreen = () => {
                   </h3>
                 </ListGroup.Item>
 
+                <ListGroup.Item>
+                  <div className='d-grid'>
+                    <Button
+                      type='button'
+                      variant='primary'
+                      disabled={cartItems.length === 0}
+                    >
+                      Proceed to Checkout
+                    </Button>
+                  </div>
+                </ListGroup.Item>
               </ListGroup>
             </Card.Body>
           </Card>

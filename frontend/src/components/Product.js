@@ -45,11 +45,19 @@ const Product = (props) => {
         
         <Card.Text>${product.price}</Card.Text>
 
-        <Button
-          onClick={() => addToCartHandler(product)}
-        >
-          Add to Cart
-        </Button>
+        {
+          product.countInStock === 0 
+          ? <Button variant='light' disabled>
+              Out Of Stock
+            </Button>
+          
+          : <Button
+              onClick={() => addToCartHandler(product)}
+            >
+              Add to Cart
+            </Button>
+        }
+        
       </Card.Body>
     </Card>
   )

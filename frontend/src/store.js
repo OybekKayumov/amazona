@@ -21,12 +21,15 @@ function reducer(state, action) {
           item._id === existItem._id ? newItem : item
         )
         : [...state.cart.cartItems, newItem];
-        
+
+        localStorage.setItem('catItems', JSON.stringify(cartItems));
         return {...state, cart: { ...state.cart, cartItems } }
     case 'CART_REMOVE_ITEM': {
       const cartItems = state.cart.cartItems.filter(
         (item) => item._id !== action.payload._id
       );
+      
+        localStorage.setItem('catItems', JSON.stringify(cartItems));
         return {...state, cart: { ...state.cart, cartItems } }
       }
 

@@ -1,10 +1,16 @@
 import React from 'react'
-import Button from 'react-bootstrap/esm/Button'
-import Container from 'react-bootstrap/esm/Container'
+import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Form from 'react-bootstrap/Form'
 import { Helmet } from 'react-helmet-async'
-import { Form } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const SigninScreen = () => {
+  const { search } = useLocation();
+  // /shipping
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
+
   return (
     <Container className='small-container'>
       <Helmet>
@@ -27,7 +33,10 @@ const SigninScreen = () => {
           <Button type='submit'>Sign In</Button>
         </div>
 
-        
+        <div className="mb-3">
+          New Customer?{' '}
+          <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+        </div>
       </Form>
     </Container>
   )

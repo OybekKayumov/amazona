@@ -24,6 +24,9 @@ app.use('/api/products', productRouter);
 //   res.send(data.products);
 // });
 
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message });
+});
 
 const port = process.env.PORT || 5000;
 

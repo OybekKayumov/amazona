@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
-import Store from '../store.js'
+import { Store } from '../store'
 
 const ShippingAddressScreen = () => {
   const navigate = useNavigate();

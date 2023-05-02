@@ -1,5 +1,7 @@
 import { BrowserRouter, Link, Route, Routes} from 'react-router-dom';
 //  import data from "./data";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import Navbar from 'react-bootstrap/Navbar';
@@ -25,6 +27,9 @@ function App() {
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
+        {/* <ToastContainer position='bottom-center' limit={1} /> */}
+        <ToastContainer position='top-center' limit={1} />
+
         <header className="">
           <Navbar bg="dark" variant="dark">
             <Container>

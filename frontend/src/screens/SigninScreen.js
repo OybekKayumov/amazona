@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form'
 import { Helmet } from 'react-helmet-async'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Store } from '../store'
+import { toast } from 'react-toastify'
 
 const SigninScreen = () => {
   const navigate = useNavigate();
@@ -33,9 +34,11 @@ const SigninScreen = () => {
       ctxDispatch({ type: 'USER_SIGNIN', payload: data});
       localStorage.setItem('userInfo', JSON.stringify(data));
       navigate(redirect || '/');
+      // toast.success(`Welcome back, ${state.userInfo}!`)
       console.log('data: ', data);
     } catch (error) {
-      alert('Invalid email or password!')
+      // alert('Invalid email or password!')
+      toast.error('Invalid email or password!')
     }
   }
 

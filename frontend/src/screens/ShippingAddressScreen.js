@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const ShippingAddressScreen = () => {
 
@@ -66,6 +67,15 @@ const ShippingAddressScreen = () => {
             required
           />
         </Form.Group>
+
+        <div className="mb-3">
+          <Button 
+            variant="primary"
+            type="submit"
+          >
+            Continue
+          </Button>
+        </div>
       </Form>
     </div>
   )

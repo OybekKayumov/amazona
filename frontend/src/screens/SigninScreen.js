@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
@@ -18,6 +18,9 @@ const SigninScreen = () => {
   const [password, setPassword] = useState('');
 
   const { state, dispatch: ctxDispatch } = useContext(Store) ;
+  
+  // get userInfo from state
+  const { userInfo } = state;
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -35,6 +38,14 @@ const SigninScreen = () => {
       alert('Invalid email or password!')
     }
   }
+
+  // if already signed in and path is /signin
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect)
+    }    
+  }, [navigate, redirect, userInfo])
+  
 
   return (
     <Container className='small-container'>

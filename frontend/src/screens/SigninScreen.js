@@ -4,10 +4,11 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import { Helmet } from 'react-helmet-async'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Store } from '../store'
 
 const SigninScreen = () => {
+  const navigate = useNavigate();
   const { search } = useLocation();
   // /shipping
   const redirectInUrl = new URLSearchParams(search).get('redirect');
@@ -25,11 +26,13 @@ const SigninScreen = () => {
         email,
         password
       });
+
       ctxDispatch({ type: 'USER_SIGNIN', payload: data});
       localStorage.setItem('userInfo', JSON.stringify(data));
+      navigate(redirect || '/');
       console.log('data: ', data);
     } catch (error) {
-      
+      alert('Invalid email or password!')
     }
   }
 

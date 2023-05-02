@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet-async'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Store } from '../store'
 import { toast } from 'react-toastify'
+import { getError } from '../utils'
 
 const SigninScreen = () => {
   const navigate = useNavigate();
@@ -38,7 +39,8 @@ const SigninScreen = () => {
       console.log('data: ', data);
     } catch (error) {
       // alert('Invalid email or password!')
-      toast.error('Invalid email or password!')
+      // toast.error('Invalid email or password!')
+      toast.error(getError(error))
     }
   }
 

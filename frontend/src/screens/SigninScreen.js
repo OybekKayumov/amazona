@@ -1,4 +1,5 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
@@ -11,6 +12,21 @@ const SigninScreen = () => {
   const redirectInUrl = new URLSearchParams(search).get('redirect');
   const redirect = redirectInUrl ? redirectInUrl : '/';
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post('/api/users/signin', {
+        email,
+        password
+      })
+    } catch (error) {
+      
+    }
+  }
+
   return (
     <Container className='small-container'>
       <Helmet>
@@ -18,10 +34,14 @@ const SigninScreen = () => {
       </Helmet>
       <h1 className='my-3'>Sign In</h1>
 
-      <Form>
+      <Form onSubmit={submitHandler}>
         <Form.Group className='mb-3' controlId='email'>
           <Form.Label>Email</Form.Label>
-          <Form.Control type='email' required />
+          <Form.Control 
+            type='email' 
+            required 
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </Form.Group>
 
         <Form.Group className='mb-3' controlId='password'>

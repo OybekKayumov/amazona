@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -10,6 +10,7 @@ const ShippingAddressScreen = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
 
   const {
+    userInfo,
     cart: { shippingAddress },
   } = state;
 
@@ -19,6 +20,14 @@ const ShippingAddressScreen = () => {
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '');
   const [country, setCountry] = useState(shippingAddress.country || '');
 
+  // if not signed in, do not show shipping details
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/signin?redirect=/shipping')
+    }  
+    
+  }, [userInfo, navigate])
+  
   const submitHandler = (e) => {
     e.preventDefault();
     ctxDispatch({

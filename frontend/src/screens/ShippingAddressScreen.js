@@ -8,7 +8,12 @@ import { Store } from '../store'
 const ShippingAddressScreen = () => {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const [fullName, setFullName] = useState('');
+
+  const {
+    cart: { shippingAddress },
+  } = state;
+
+  const [fullName, setFullName] = useState(shippingAddress.fullName || '');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [postalCode, setPostalCode] = useState('');

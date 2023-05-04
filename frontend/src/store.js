@@ -48,7 +48,15 @@ function reducer(state, action) {
       return { ...state, userInfo: action.payload };
 
     case 'USER_SIGNOUT':
-      return { ...state, userInfo: null}
+      return { 
+        ...state, 
+        userInfo: null,
+        // reset CartItems and shippingAddress to empty for Signed Out user
+        cart: {
+          cartItems: [],
+          shippingAddress: {},
+        },
+      };
     
     case 'SAVE_SHIPPING_ADDRESS':
       return {

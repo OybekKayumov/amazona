@@ -1,5 +1,14 @@
 # MERN AMAZONA
 
+## run the project:
+   1. cd backend
+   2. run 'npm i', 'npm start'
+   3. make sure that connected to mongodb
+   4. open the link 'http://localhost:5000/api/seed'
+   5. cd frontend
+   6. run 'npm i', 'npm start'
+   7. it opens the link http://localhost:3000/
+
 ## Lessons
   1. Introduction
   2. Install Tools

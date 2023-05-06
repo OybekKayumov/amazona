@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
@@ -10,8 +10,27 @@ import { Store } from '../store';
 import CheckoutSteps from '../components/CheckoutSteps';
 
 const PlaceOrderScreen = () => {
+  const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
+
+  // 123.4567 => 123.45
+  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
+
+  cart.itemPrice = round2(
+    cart.cartItems.reduce((acc, curr) => acc + curr.quantity * curr.price, 0)
+  );
+
+  const placeOrderHandler = async () => {
+
+  }
+
+  useEffect(() => {
+    if (!cart.paymentMethod) {
+      navigate('/payment');
+    }
+  }, [cart, navigate])
+   
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>       
@@ -74,6 +93,56 @@ const PlaceOrderScreen = () => {
               </ListGroup>
 
               <Link to="/cart">Edit</Link>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        <Col md={4}>
+          <Card>
+            <Card.Body>
+              <Card.Title>Order Summary</Card.Title>
+              <ListGroup variant='flush'>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Items</Col>
+                    <Col>${cart.itemPrice.toFixed(2)}</Col>
+                  </Row>
+                </ListGroup.Item>
+
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Shipping</Col>
+                    <Col>${cart.shippingPrice.toFixed(2)}</Col>
+                  </Row>
+                </ListGroup.Item>
+
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Tax</Col>
+                    <Col>${cart.taxPrice.toFixed(2)}</Col>
+                  </Row>
+                </ListGroup.Item>
+
+                <ListGroup.Item>
+                  <Row>
+                    <Col><strong>Order Total</strong></Col>
+                    <Col><strong>${cart.totalPrice.toFixed(2)}</strong></Col>
+                  </Row>
+                </ListGroup.Item>
+
+                <ListGroup.Item>
+                  <div className="d-grid">
+                    <Button
+                      type='button'
+                      onClick={placeOrderHandler}
+                      disabled={cart.cartItems.length === 0}
+                    >
+                      Place Order
+                    </Button>
+                  </div>
+                </ListGroup.Item>
+
+              </ListGroup>
             </Card.Body>
           </Card>
         </Col>

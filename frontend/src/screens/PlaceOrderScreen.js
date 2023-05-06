@@ -37,6 +37,45 @@ const PlaceOrderScreen = () => {
               <Link to="/shipping">Edit</Link>
             </Card.Body>
           </Card>
+
+          <Card className='mb-3'>
+            <Card.Body>
+              <Card.Title>Payment</Card.Title>
+
+              <Card.Text>
+                <strong>Method:</strong> {cart.paymentMethod}
+              </Card.Text>
+
+              <Link to="/payment">Edit</Link>
+            </Card.Body>
+          </Card>
+
+          <Card className='mb-3'>
+            <Card.Body>
+              <Card.Title>Items</Card.Title>
+
+              <ListGroup variant='flush'>
+                {cart.cartItems.map((item) => (
+                  <ListGroup.Item key={item._id}>
+                    <Row className='align-items-center'>
+                      <Col md={6}>
+                        <img 
+                          src={item.image} alt={item.name} 
+                          className='img-fluid rounded img-thumbnail'
+                        ></img>{' '}
+
+                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                      </Col>
+                      <Col md={3}><span>{item.quantity}</span></Col>
+                      <Col md={3}>{item.price}</Col>
+                    </Row>
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+
+              <Link to="/cart">Edit</Link>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </div>

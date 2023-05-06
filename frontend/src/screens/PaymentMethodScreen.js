@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { Helmet } from 'react-helmet-async';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { Store } from '../store';
+import { useNavigate } from 'react-router-dom';
 
 const PaymentMethodScreen = () => {
+  const navigate = useNavigate();
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+
+  // from state get cart, from cart get shippingAddress and paymentMethod
+  const {
+    cart: { shippingAddress, paymentMethod },
+  } = state;
+
+  const [paymentMethodName, setPaymentMethod ] = useState(
+    paymentMethod || 'PayPal'
+  );
+
+  // if shippingAddress does not exist, navigate user to previous step
+  useEffect(() => {
+    if (!shippingAddress.address) {
+      navigate('/shipping')
+    }    
+  }, [shippingAddress, navigate])
+
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -24,10 +45,10 @@ const PaymentMethodScreen = () => {
           <div className="mb-3">
             <Form.Check
               type='radio'
-              id='Paypal'
-              label='Paypal'
-              value='Paypal'
-              checked={paymentMethodName === 'Paypal'}
+              id='PayPal'
+              label='PayPal'
+              value='PayPal'
+              checked={paymentMethodName === 'PayPal'}
               onChange={(e) => setPaymentMethod(e.target.value)}
             />
           </div>

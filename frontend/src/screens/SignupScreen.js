@@ -33,7 +33,7 @@ const SignupScreen = () => {
       toast.error('Password do not match');
       return;
     }
-    
+
     try {
       const { data } = await axios.post('/api/users/signup', {
         name,
@@ -72,7 +72,7 @@ const SignupScreen = () => {
         <Form.Group className='mb-3' controlId='name'>
           <Form.Label>Name</Form.Label>
           <Form.Control 
-            type='email' 
+            type='name' 
             required 
             onChange={(e) => setName(e.target.value)}
           />

@@ -30,7 +30,7 @@ userRouter.post(
 userRouter.post(
   '/signup',
   expressAsyncHandler(async (req, res) => {
-    // create a new user
+    // create a new user from mongoose model
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,

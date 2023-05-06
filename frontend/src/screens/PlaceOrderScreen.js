@@ -1,15 +1,17 @@
-import React from 'react';
-import CheckoutSteps from '../components/CheckoutSteps';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link, useNavigate } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { Link } from 'react-router-dom';
+import { Store } from '../store';
+import CheckoutSteps from '../components/CheckoutSteps';
 
 const PlaceOrderScreen = () => {
-
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>       

@@ -21,6 +21,10 @@ const PlaceOrderScreen = () => {
     cart.cartItems.reduce((acc, curr) => acc + curr.quantity * curr.price, 0)
   );
 
+  cart.shippingPrice = cart.itemPrice > 100 ? round2(0) : round2(10);
+  cart.taxPrice = round2(0.15 * cart.itemPrice);
+  cart.totalPrice = cart.itemPrice + cart.shippingPrice + cart.taxPrice;
+
   const placeOrderHandler = async () => {
 
   }

@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Store } from '../store';
 import CheckoutSteps from '../components/CheckoutSteps';
+import { toast } from 'react-toastify';
+import { getError } from '../utils';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -48,8 +50,13 @@ const PlaceOrderScreen = () => {
   cart.totalPrice = cart.itemPrice + cart.shippingPrice + cart.taxPrice;
 
   const placeOrderHandler = async () => {
-
-  }
+    try {
+      
+    } catch (error) {
+      dispatch({ type: 'CREATE_FAIL' });
+      toast.error(getError(error));
+    }
+  };
 
   useEffect(() => {
     if (!cart.paymentMethod) {

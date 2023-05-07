@@ -10,6 +10,7 @@ import { Store } from '../store';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
+import axios from 'axios';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -30,9 +31,8 @@ const reducer = (state, action) => {
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
 
-  const [{ loading, error }, dispatch] = useReducer(reducer, {
+  const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
-    error: '',
   });
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -51,9 +51,31 @@ const PlaceOrderScreen = () => {
 
   const placeOrderHandler = async () => {
     try {
-      
+      dispatch({ type: 'CREATE_REQUEST' });
+
+      const {data} = await axios.post(
+        '/api/orders',
+        {
+          orderItems: cart.cartItems,
+          shippingAddress: cart.shippingAddress,
+          paymentMethod: cart.paymentMethod,
+          itemPrice: cart.itemPrice,
+          shippingPrice: cart.shippingPrice,
+          totalPrice: cart.totalPrice,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${userInfo.token}`
+          },
+        }
+      );
+      ctxDispatch({ type: 'CART_CLEAR' });  // to store.js
+      dispatch({ type: 'CREATE_SUCCESS' }); // to reducer
+      localStorage.removeItem('cartItems');
+      navigate(`/order/${data.order._id}`)
+
     } catch (error) {
-      dispatch({ type: 'CREATE_FAIL' });
+      dispatch({ type: 'CREATE_FAIL' }); 
       toast.error(getError(error));
     }
   };

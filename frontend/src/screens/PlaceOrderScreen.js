@@ -11,6 +11,7 @@ import CheckoutSteps from '../components/CheckoutSteps';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import axios from 'axios';
+import LoadingBox from '../components/LoadingBox';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -195,6 +196,9 @@ const PlaceOrderScreen = () => {
                       Place Order
                     </Button>
                   </div>
+
+                  { loading && <LoadingBox></LoadingBox>}
+
                 </ListGroup.Item>
 
               </ListGroup>

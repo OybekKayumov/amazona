@@ -23,7 +23,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import Button from 'react-bootstrap/Button';
 import { getError } from './utils';
 import axios from 'axios';
-import SearchBox from './components/SearchBox';
+import SearchBox from './components/Searchbox';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -126,7 +126,7 @@ function App() {
             {categories.map((category) => (
               <Nav.Item key={category}>
                 <LinkContainer
-                  to={`/search?category=${category}`}
+                  to={`/search/category=${category}`}
                   onClick={() => setSidebarIsOpen(false)}
                 >
                   <Nav.Link>{category}</Nav.Link>

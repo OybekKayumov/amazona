@@ -145,4 +145,16 @@
     2. show user information
     3. create user update api
     4. update user info
-  33. 
+  33. Publish To 
+    1. create and config node project
+    2. serve build folder in frontend folder
+    3. Create    account
+    4. connect it to github
+    5. Create mongodb atlas database
+    6. Set database connection in    env variables
+    7. Commit and push
+  34. Add Sidebar and Search Box
+    1. add sidebar
+    2. add search box
+  35. 
+

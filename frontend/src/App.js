@@ -26,6 +26,8 @@ import axios from 'axios';
 import SearchBox from './components/Searchbox';
 import SearchScreen from './screens/SearchScreen';
 import ProtectedRoute from './components/ProtectedRoute';
+import DashboardScreen from './screens/DashboardScreen';
+import AdminRoute from './components/AdminRoute';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -191,6 +193,17 @@ function App() {
                 element={<ShippingAddressScreen />}
               ></Route>
               <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+
+              {/* Admin Routes */}
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <AdminRoute>
+                    <DashboardScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>

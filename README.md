@@ -1,13 +1,34 @@
 # MERN AMAZONA
 
-## run the project:
-   1. `cd backend`
-   2. run `npm i`, `npm start`
-   3. make sure that connected to mongodb
-   4. open the link `http://localhost:5000/api/seed`
-   5. `cd frontend`
-   6. run `npm i`, `npm start`
-   7. it opens the link `http://localhost:3000/`
+## Run Locally
+### 1. Clone repo
+    `$ git clone git@github.com:OybekKayumov/amazona.git
+     $ cd amazona`
+
+### 2. Create .env File
+    duplicate .env.example in backend folder and rename it to .env
+### 3. Setup MongoDB
+    Local MongoDB
+       Install it from mongodb.com
+       In .env file update MONGODB_URI=mongodb://localhost/amazona
+    OR Atlas Cloud MongoDB
+       Create database at https://cloud.mongodb.com
+       In .env file update MONGODB_URI=mongodb+srv://your-db-connection
+### 4. Run Backend
+    `$ cd backend
+    $ npm install
+    $ npm start`
+### 5. Run Frontend
+    `# open new terminal
+    $ cd frontend
+    $ npm install
+    $ npm start`
+### 6. Seed Users and Products
+    Run this on browser: http://localhost:5000/api/seed
+    It returns admin email and password and 6 sample products
+### 7. Admin Login
+    Run http://localhost:3000/signin
+    Enter admin email and password and click signin
 
 ## Lessons
   1. Introduction
@@ -164,3 +185,7 @@
       1. define protected route component
       2. define admin route component
       3. add menu for admin in header
+  37. Create Dashboard Screen
+      1. create dashboard ui
+      2. implement backend api
+      3. connect ui to backend

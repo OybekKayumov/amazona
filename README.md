@@ -25,7 +25,7 @@
     $ npm start
 ### 6. Seed Users and Products
     Run this on browser: http://localhost:5000/api/seed
-    It returns admin email and password and 6 sample products
+    It returns admin email and password and 4 sample products
 ### 7. Admin Login
     Run http://localhost:3000/signin
     Enter admin email and password and click signin
